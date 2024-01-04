@@ -40,7 +40,7 @@ async function deletePost(id: string): Promise<void> {
 const Post: React.FC<PostProps> = (props) => {
   const { data: session, status } = useSession();
   if (status === "loading") {
-    return <div>Authenticating ...</div>;
+    return <div>Authenticating...</div>;
   }
   const userHasValidSession = Boolean(session);
   const postBelongsToUser = session?.user?.email === props.author?.email;
