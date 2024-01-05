@@ -93,7 +93,7 @@ const MyWounds: React.FC = () => {
     <Layout>
       <FormContainer>
         <Form onSubmit={handleSubmit(submitData)}>
-          <h1>New Wound</h1>
+          <h1>Create New Wound</h1>
           <Controller
             name="type"
             control={control}
@@ -178,7 +178,10 @@ const MyWounds: React.FC = () => {
               <div
                 style={{ left: 5, top: 0, position: "absolute", zIndex: "2" }}
               >
-                <BacksideHuman onLocationChange={handleLocationChange} />
+                <BacksideHuman
+                  onLocationChange={handleLocationChange}
+                  location={watch("location")}
+                />
               </div>
               <Image
                 src={backHuman}
