@@ -1,18 +1,76 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+import { Select, MenuItem, TextField, Button, Box } from "@mui/material";
+import styled from "@emotion/styled";
 import Layout from "../components/Layout";
-import Router from "next/router";
-import BacksideHuman from "../components/BacksideHuman";
 import FrontsideHuman from "../components/FrontsideHuman";
+import BacksideHuman from "../components/BacksideHuman";
+import Router from "next/router";
 
-const myWounds: React.FC = () => {
-  const [type, setType] = useState("");
-  const [location, setLocation] = useState("");
-  const [note, setNote] = useState("");
+interface FormData {
+  type: string;
+  location: string;
+  note: string;
+}
 
-  const submitData = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
+const schema = yup.object({
+  type: yup.string().required("Type is required"),
+  location: yup.string().required("Location is required"),
+  note: yup.string(),
+});
+
+const FormContainer = styled("div")`
+  /* Add your styles for the form container */
+  padding: 1rem;
+`;
+
+const Form = styled("form")`
+  /* Add your styles for the form */
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledSelect = styled(Select)`
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+`;
+
+const StyledTextField = styled(TextField)`
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 0.25rem;
+`;
+
+const StyledButton = styled(Button)`
+  background: #ececec;
+  border: 0;
+  padding: 1rem 2rem;
+`;
+
+const ErrorText = styled("div")`
+  color: red;
+  margin-top: 0.25rem;
+`;
+
+const MyWounds: React.FC = () => {
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
+
+  const submitData = async (data: FormData) => {
     try {
-      const body = { type, location, note };
+      const body = data;
       await fetch("/api/wound", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,94 +82,103 @@ const myWounds: React.FC = () => {
     }
   };
 
-  const handleLocationChange = (newLocation) => {
-    setLocation(newLocation);
+  const handleLocationChange = (newLocation: string) => {
+    setValue("location", newLocation);
   };
 
   return (
     <Layout>
-      <div>
-        <form onSubmit={submitData}>
+      <FormContainer>
+        <Form onSubmit={handleSubmit(submitData)}>
           <h1>New Wound</h1>
-          <select
-            autoFocus
-            onChange={(e) => setType(e.target.value)}
-            value={type}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              margin: "0.5rem 0",
-              borderRadius: "0.25rem",
-              border: "0.125rem solid rgba(0, 0, 0, 0.2)",
-              boxSizing: "border-box", // Ensure padding and border are included in the width
+          <Controller
+            name="type"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <>
+                <StyledSelect autoFocus {...field} variant="standard">
+                  <MenuItem value="" disabled>
+                    Select type of wound
+                  </MenuItem>
+                  <MenuItem value="Abrasion">Abrasion</MenuItem>
+                  <MenuItem value="Laceration">Laceration</MenuItem>
+                  <MenuItem value="Incision">Incision</MenuItem>
+                  <MenuItem value="Puncture">Puncture</MenuItem>
+                  <MenuItem value="Avulsion">Avulsion</MenuItem>
+                  <MenuItem value="Contusion">Contusion (Bruise)</MenuItem>
+                  <MenuItem value="Fracture">Fracture</MenuItem>
+                  <MenuItem value="Internal Bleeding">
+                    Internal Bleeding
+                  </MenuItem>
+                </StyledSelect>
+                {errors.type && <ErrorText>{errors.type.message}</ErrorText>}
+              </>
+            )}
+          />
+          <Controller
+            name="location"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <>
+                <StyledTextField
+                  {...field}
+                  placeholder="Location"
+                  type="text"
+                  value={field.value}
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  sx={{ pointerEvents: "none" }}
+                  variant="standard"
+                />
+                {errors.location && (
+                  <ErrorText>{errors.location.message}</ErrorText>
+                )}
+              </>
+            )}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
             }}
           >
-            <option value="" disabled>
-              Select type of wound
-            </option>
-            <option value="Abrasion">Abrasion</option>
-            <option value="Laceration">Laceration</option>
-            <option value="Incision">Incision</option>
-            <option value="Puncture">Puncture</option>
-            <option value="Avulsion">Avulsion</option>
-            <option value="Contusion">Contusion (Bruise)</option>
-            <option value="Fracture">Fracture</option>
-            <option value="Internal Bleeding">Internal Bleeding</option>
-          </select>
+            Front Side:
+            <FrontsideHuman
+              onLocationChange={handleLocationChange}
+              location={watch("location")}
+            />
+            Back side:
+            <BacksideHuman onLocationChange={handleLocationChange} />
+          </Box>
 
-          <input
-            readOnly
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Location"
-            type="text"
-            value={location}
+          <Controller
+            name="note"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <StyledTextField
+                {...field}
+                placeholder="Notes"
+                type="text"
+                value={field.value}
+                variant="standard"
+              />
+            )}
           />
-          <input
-            onChange={(e) => setNote(e.target.value)}
-            placeholder="Notes"
-            type="text"
-            value={note}
-          />
-          <input disabled={!location || !type} type="submit" value="Create" />
-          <a className="back" href="#" onClick={() => Router.push("/")}>
+          <StyledButton type="submit" disabled={Object.keys(errors).length > 0}>
+            Create
+          </StyledButton>
+          <a className="back" href="#" onClick={() => console.log("Cancel")}>
             or Cancel
           </a>
-        </form>
-        Front Side:
-        <FrontsideHuman onLocationChange={handleLocationChange} />
-        Back side:
-        <BacksideHuman onLocationChange={handleLocationChange} />
-      </div>
-      <style jsx>{`
-        .page {
-          background: var(--geist-background);
-          padding: 3rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        input[type="text"],
-        textarea {
-          width: 100%;
-          padding: 0.5rem;
-          margin: 0.5rem 0;
-          border-radius: 0.25rem;
-          border: 0.125rem solid rgba(0, 0, 0, 0.2);
-        }
-
-        input[type="submit"] {
-          background: #ececec;
-          border: 0;
-          padding: 1rem 2rem;
-        }
-
-        .back {
-          margin-left: 1rem;
-        }
-      `}</style>
+        </Form>
+      </FormContainer>
     </Layout>
   );
 };
 
-export default myWounds;
+export default MyWounds;
