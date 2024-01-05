@@ -118,11 +118,11 @@ const Header: React.FC = () => {
       <div className="left">
         <Link href="/">
           <a className="bold" data-active={isActive("/")}>
-            Feed
+            All wounds
           </a>
         </Link>
-        <Link href="/drafts">
-          <a data-active={isActive("/drafts")}>My drafts</a>
+        <Link href="/myWounds">
+          <a data-active={isActive("/myWounds")}>My wounds</a>
         </Link>
         <style jsx>{`
           .bold {
@@ -152,7 +152,7 @@ const Header: React.FC = () => {
         </p>
         <Link href="/create">
           <button>
-            <a>New post</a>
+            <a>New wound</a>
           </button>
         </Link>
         <button onClick={() => signOut()}>

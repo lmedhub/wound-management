@@ -1,12 +1,11 @@
 import React from "react";
 import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
-import Post, { PostProps } from "../components/Post";
+import Wound, { WoundProps } from "../components/Wound";
 import prisma from "../lib/prisma";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const feed = await prisma.post.findMany({
-    where: { published: true },
+  const feed = await prisma.wound.findMany({
     include: {
       author: {
         select: { name: true },
@@ -19,33 +18,33 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 type Props = {
-  feed: PostProps[];
+  feed: WoundProps[];
 };
 
 const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div className="page">
-        <h1>Public Feed</h1>
+        <h1>All wounds</h1>
         <main>
-          {props.feed.map((post) => (
-            <div key={post.id} className="post">
-              <Post post={post} />
+          {props.feed.map((wound) => (
+            <div key={wound.id} className="wound">
+              <Wound wound={wound} />
             </div>
           ))}
         </main>
       </div>
       <style jsx>{`
-        .post {
+        .wound {
           background: white;
           transition: box-shadow 0.1s ease-in;
         }
 
-        .post:hover {
+        .wound:hover {
           box-shadow: 1px 1px 3px #aaa;
         }
 
-        .post + .post {
+        .wound + .wound {
           margin-top: 2rem;
         }
       `}</style>

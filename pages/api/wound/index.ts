@@ -1,22 +1,18 @@
-import { getSession } from 'next-auth/react';
 import prisma from '../../../lib/prisma';
 import { getServerSession } from 'next-auth';
 import { options } from '../auth/[...nextauth]';
 
-// POST /api/post
-// Required fields in body: title
-// Optional fields in body: content
-
 export default async function handle(req, res) {
-  const { title, content } = req.body;
+  const { type, location, note } = req.body;
   const session = await getServerSession(req, res, options)
 
   if (session) {
     console.log(session)
-    const result = await prisma.post.create({
+    const result = await prisma.wound.create({
         data: {
-          title: title,
-          content: content,
+          type: type,
+          location: location,
+          note: note,
           author: { connect: { email: session?.user?.email } },
         },
       });

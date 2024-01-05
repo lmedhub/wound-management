@@ -3,12 +3,12 @@ import { GetServerSideProps } from "next";
 import ReactMarkdown from "react-markdown";
 import Router from "next/router";
 import Layout from "../../components/Layout";
-import { PostProps } from "../../components/Post";
+import { WoundProps } from "../../components/Wound";
 import { useSession } from "next-auth/react";
 import prisma from "../../lib/prisma";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const post = await prisma.post.findUnique({
+  const wound = await prisma.wound.findUnique({
     where: {
       id: String(params?.id),
     },
@@ -19,48 +19,34 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   });
   return {
-    props: post,
+    props: wound,
   };
 };
 
-async function publishPost(id: string): Promise<void> {
-  await fetch(`/api/publish/${id}`, {
-    method: "PUT",
-  });
-  await Router.push("/");
-}
-
-async function deletePost(id: string): Promise<void> {
-  await fetch(`/api/post/${id}`, {
+async function deleteWound(id: string): Promise<void> {
+  await fetch(`/api/wound/${id}`, {
     method: "DELETE",
   });
   Router.push("/");
 }
 
-const Post: React.FC<PostProps> = (props) => {
+const Wound: React.FC<WoundProps> = (props) => {
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <div>Authenticating...</div>;
   }
   const userHasValidSession = Boolean(session);
-  const postBelongsToUser = session?.user?.email === props.author?.email;
-  let title = props.title;
-  if (!props.published) {
-    title = `${title} (Draft)`;
-  }
+  const woundBelongsToUser = session?.user?.email === props.author?.email;
 
   return (
     <Layout>
       <div>
-        <h2>{title}</h2>
+        <h2>Type: {props.type}</h2>
+        <h3>Location: {props.location}</h3>
         <p>By {props?.author?.name || "Unknown author"}</p>
-        <ReactMarkdown children={props.content} />
-
-        {!props.published && userHasValidSession && postBelongsToUser && (
-          <button onClick={() => publishPost(props.id)}>Publish</button>
-        )}
-        {userHasValidSession && postBelongsToUser && (
-          <button onClick={() => deletePost(props.id)}>Delete</button>
+        <ReactMarkdown children={props.note} />
+        {userHasValidSession && woundBelongsToUser && (
+          <button onClick={() => deleteWound(props.id)}>Delete</button>
         )}
       </div>
       <style jsx>{`
@@ -88,4 +74,4 @@ const Post: React.FC<PostProps> = (props) => {
   );
 };
 
-export default Post;
+export default Wound;
