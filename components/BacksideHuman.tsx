@@ -4,9 +4,9 @@ export default function BacksideHuman({ onLocationChange }) {
   return (
     <>
       <svg
-        width={188}
+        width={200}
         height={376}
-        viewBox="0 0 188 376"
+        viewBox="0 0 200 376"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -182,7 +182,7 @@ export default function BacksideHuman({ onLocationChange }) {
       </svg>
       <style jsx>{`
         g {
-          pointer-events: bounding-box;
+          transition: fill 0.3s ease;
         }
         g:hover {
           fill: #ffa07a;

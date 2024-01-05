@@ -83,7 +83,7 @@ export default function FrontsideHuman({ onLocationChange, location }) {
 
         <g
           name="crotch"
-          fill="#F08239"
+          fill={location === "Crotch" ? "#FF4500" : "#F08239"}
           onClick={() => onLocationChange("Crotch")}
         >
           <path
@@ -102,7 +102,7 @@ export default function FrontsideHuman({ onLocationChange, location }) {
 
         <g
           name="frontHead"
-          fill="#F08239"
+          fill={location === "Front of the arms" ? "#FF4500" : "#F08239"}
           onClick={() => onLocationChange("Front of the arms")}
         >
           <path
@@ -168,7 +168,7 @@ export default function FrontsideHuman({ onLocationChange, location }) {
         </g>
         <g
           name="frontHead"
-          fill="#F08239"
+          fill={location === "Front of the head" ? "#FF4500" : "#F08239"}
           onClick={() => onLocationChange("Front of the head")}
         >
           <path
@@ -199,7 +199,7 @@ export default function FrontsideHuman({ onLocationChange, location }) {
 
         <g
           name="chest"
-          fill="#F08239"
+          fill={location === "Front of the torso" ? "#FF4500" : "#F08239"}
           onClick={() => onLocationChange("Front of the torso")}
         >
           <path

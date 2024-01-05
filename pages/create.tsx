@@ -2,13 +2,16 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
 import { Select, MenuItem, TextField, Button, Box } from "@mui/material";
 import styled from "@emotion/styled";
 import Layout from "../components/Layout";
 import FrontsideHuman from "../components/FrontsideHuman";
+import frontalHuman from "../assets/frontalHuman.png";
 import BacksideHuman from "../components/BacksideHuman";
+import backHuman from "../assets/backHuman.png";
 import Router from "next/router";
+import Image from "next/image";
+import zIndex from "@mui/material/styles/zIndex";
 
 interface FormData {
   type: string;
@@ -142,17 +145,50 @@ const MyWounds: React.FC = () => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: ["column", "row"],
               justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            Front Side:
-            <FrontsideHuman
-              onLocationChange={handleLocationChange}
-              location={watch("location")}
-            />
-            Back side:
-            <BacksideHuman onLocationChange={handleLocationChange} />
+            <Box
+              sx={{
+                position: "relative",
+              }}
+            >
+              <div style={{ top: 0, position: "absolute", zIndex: "2" }}>
+                <FrontsideHuman
+                  onLocationChange={handleLocationChange}
+                  location={watch("location")}
+                />
+              </div>
+              <Image
+                src={frontalHuman}
+                alt="Frontal Human"
+                layout="fixed"
+                width={200}
+                height={376}
+                style={{ left: 1, top: 0 }}
+              />
+            </Box>
+            <Box
+              sx={{
+                position: "relative",
+              }}
+            >
+              <div
+                style={{ left: 5, top: 0, position: "absolute", zIndex: "2" }}
+              >
+                <BacksideHuman onLocationChange={handleLocationChange} />
+              </div>
+              <Image
+                src={backHuman}
+                alt="Back of a Human"
+                width={200}
+                height={376}
+                layout="fixed"
+                style={{ left: 1, top: 0 }}
+              />
+            </Box>
           </Box>
 
           <Controller
