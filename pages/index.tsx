@@ -3,6 +3,8 @@ import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import Wound, { WoundProps } from "../components/Wound";
 import prisma from "../lib/prisma";
+import { Grid, Card, Typography } from "@mui/material";
+import styled from "@emotion/styled";
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.wound.findMany({
@@ -17,37 +19,32 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 10,
   };
 };
+
 type Props = {
   feed: WoundProps[];
 };
 
+const StyledWoundContainer = styled("div")`
+  .wound {
+    margin-bottom: 16px;
+  }
+`;
+
 const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
-      <div className="page">
-        <h1>All wounds</h1>
-        <main>
+      <StyledWoundContainer>
+        <Typography variant="h3">All wounds</Typography>
+        <Grid container spacing={3}>
           {props.feed.map((wound) => (
-            <div key={wound.id} className="wound">
-              <Wound wound={wound} />
-            </div>
+            <Grid item key={wound.id} xs={12} sm={6} md={4}>
+              <Card className="wound">
+                <Wound wound={wound} />
+              </Card>
+            </Grid>
           ))}
-        </main>
-      </div>
-      <style jsx>{`
-        .wound {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .wound:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .wound + .wound {
-          margin-top: 2rem;
-        }
-      `}</style>
+        </Grid>
+      </StyledWoundContainer>
     </Layout>
   );
 };

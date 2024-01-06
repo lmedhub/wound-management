@@ -1,6 +1,7 @@
 import React from "react";
 import Router from "next/router";
-import ReactMarkdown from "react-markdown";
+import { Card, Typography } from "@mui/material";
+import styled from "@emotion/styled";
 
 export type WoundProps = {
   id: string;
@@ -13,21 +14,43 @@ export type WoundProps = {
   note: string;
 };
 
+const StyledWoundCard = styled(Card)`
+  && {
+    color: inherit;
+    padding: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #f5f5f5; /* Add your desired hover background color */
+    }
+
+    .notes {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+      display: block;
+    }
+  }
+`;
+
 const Wound: React.FC<{ wound: WoundProps }> = ({ wound }) => {
   const authorName = wound.author ? wound.author.name : "Unknown author";
+
+  const handleCardClick = () => {
+    Router.push("/wound/[id]", `/wound/${wound.id}`);
+  };
+
   return (
-    <div onClick={() => Router.push("/p/[id]", `/p/${wound.id}`)}>
-      <h2>Type: {wound.type}</h2>
-      <h3>Location: {wound.location}</h3>
-      <small>By {authorName}</small>
-      <ReactMarkdown children={wound.note} />
-      <style jsx>{`
-        div {
-          color: inherit;
-          padding: 2rem;
-        }
-      `}</style>
-    </div>
+    <StyledWoundCard onClick={handleCardClick}>
+      <Typography variant="h6">Type: {wound.type}</Typography>
+      <Typography variant="subtitle1">Location: {wound.location}</Typography>
+      <Typography variant="caption">Author: {authorName}</Typography>
+      <Typography variant="body2" className="notes">
+        {wound.note}
+      </Typography>
+    </StyledWoundCard>
   );
 };
 

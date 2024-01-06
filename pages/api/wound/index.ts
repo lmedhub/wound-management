@@ -7,7 +7,6 @@ export default async function handle(req, res) {
   const session = await getServerSession(req, res, options)
 
   if (session) {
-    console.log(session)
     const result = await prisma.wound.create({
         data: {
           type: type,
