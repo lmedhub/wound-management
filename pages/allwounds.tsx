@@ -6,7 +6,6 @@ import WoundList from "../components/WoundList";
 import { Typography } from "@mui/material";
 import { getSession } from "next-auth/react";
 import UnauthorizedPage from "../components/Unauthorized";
-import { Session } from "next-auth";
 
 export const getStaticProps = async (context) => {
   const session = await getSession(context);
