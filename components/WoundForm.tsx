@@ -54,7 +54,7 @@ export default function WoundForm({ submitData, existingData = null }) {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       type: existingData?.type,
