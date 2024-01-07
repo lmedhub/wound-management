@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import { WoundProps } from "../components/Wound";
 import prisma from "../lib/prisma";
