@@ -1,25 +1,15 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { MenuItem, Button, Box, Container } from "@mui/material";
-import styled from "@emotion/styled";
 import Layout from "../../../components/Layout";
-import FrontsideHuman from "../../../components/FrontsideHuman";
-import frontalHuman from "../../../assets/frontalHuman.png";
-import BacksideHuman from "../../../components/BacksideHuman";
-import backHuman from "../../../assets/backHuman.png";
 import Router from "next/router";
-import Image from "next/image";
-import StyledSelect from "../../../components/FormComponents/StyledSelect";
-import StyledTextField from "../../../components/FormComponents/StyledTextField";
-import ErrorText from "../../../components/FormComponents/ErrorText";
-import StyledButton from "../../../components/FormComponents/StyledButton";
-import { useRouter } from "next/router";
 import WoundForm from "../../../components/WoundForm";
 import prisma from "../../../lib/prisma";
 import { GetServerSideProps } from "next";
 import { WoundProps } from "../../../components/Wound";
+import { getSession } from "next-auth/react";
+import { Session } from "next-auth";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import UnauthorizedPage from "../../../components/Unauthorized";
+import { Button } from "@mui/material";
 
 interface FormData {
   type: string;
@@ -27,18 +17,10 @@ interface FormData {
   note: string;
 }
 
-const schema = yup.object({
-  type: yup.string().required("Type is required"),
-  location: yup.string().required("Location is required"),
-  note: yup.string(),
-});
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
+  const session = await getSession(context);
 
-const Form = styled("form")`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const wound = await prisma.wound.findUnique({
     where: {
       id: String(params?.id),
@@ -50,14 +32,21 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   });
   return {
-    props: wound,
+    props: { wound, session, params },
   };
 };
 
-const MyWounds: React.FC<WoundProps> = (props) => {
-  const router = useRouter();
-  const { id } = router.query;
-  const existingData = { props };
+type Props = {
+  wound: WoundProps;
+  session: Session;
+  params: Params;
+};
+
+const EditWound: React.FC<Props> = (props) => {
+  const id = props.params?.id;
+  const existingData = props.wound;
+  const woundBelongsToUser =
+    props.session?.user?.email === props.wound?.author?.email;
 
   const editData = async (data: FormData) => {
     try {
@@ -69,9 +58,13 @@ const MyWounds: React.FC<WoundProps> = (props) => {
       });
       await Router.push("/");
     } catch (error) {
-      console.error(error);
+      console.log("Error editing data. Please try again.", "error");
     }
   };
+
+  if (!props.session || !woundBelongsToUser) {
+    return <UnauthorizedPage />;
+  }
 
   return (
     <Layout>
@@ -80,4 +73,4 @@ const MyWounds: React.FC<WoundProps> = (props) => {
   );
 };
 
-export default MyWounds;
+export default EditWound;

@@ -16,5 +16,11 @@ export const options = {
   ],
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
+  callbacks: {
+    session({ session, user }) {
+    session.user.role = user.role; 
+    return session;
+   }
+ }
 };
 

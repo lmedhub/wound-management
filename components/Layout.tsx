@@ -7,14 +7,16 @@ type Props = {
   children: ReactNode;
 };
 
-const Layout: React.FC<Props> = (props) => (
-  <>
-    <CssBaseline />
-    <Header />
-    <Container maxWidth="xl" sx={{ padding: "1rem" }}>
-      {props.children}
-    </Container>
-  </>
-);
+function Layout(props: Props) {
+  return (
+    <>
+      <CssBaseline />
+      <Header />
+      <Container maxWidth="xl" sx={{ padding: "1rem" }}>
+        {props.children}
+      </Container>
+    </>
+  );
+}
 
 export default Layout;

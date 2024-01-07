@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
@@ -15,10 +14,11 @@ import Container from "@mui/material/Container";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
+import { Button } from "@mui/material";
 
 const Header: React.FC = () => {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -133,13 +133,16 @@ const Header: React.FC = () => {
             sx={{ gap: 1, flexGrow: 1, display: { xs: "none", md: "flex" } }}
           >
             <Link href={"/"}>
-              <Typography textAlign="center">All wounds</Typography>
+              <Button color="inherit">My wounds</Button>
             </Link>
-            <Link href={"/mywounds"}>
-              <Typography textAlign="center">My wounds</Typography>
-            </Link>
+            {session?.user?.role === "ADMIN" && (
+              <Link href={"/allwounds"}>
+                <Button color="inherit">All wounds</Button>
+              </Link>
+            )}
+
             <Link href={"/wound/create"}>
-              <Typography textAlign="center">New wound</Typography>
+              <Button color="inherit">New wound</Button>
             </Link>
           </Box>
 
@@ -174,12 +177,7 @@ const Header: React.FC = () => {
                 </MenuItem>
               ) : (
                 <MenuItem>
-                  <Link
-                    href="/api/auth/signin"
-                    data-active={isActive("/signup")}
-                  >
-                    Log in
-                  </Link>
+                  <Link href="/api/auth/signin">Log in</Link>
                 </MenuItem>
               )}
             </Menu>

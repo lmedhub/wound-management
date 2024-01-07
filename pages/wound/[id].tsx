@@ -1,23 +1,18 @@
 import React from "react";
-import { GetServerSideProps } from "next";
 import ReactMarkdown from "react-markdown";
 import Router from "next/router";
 import Layout from "../../components/Layout";
 import { WoundProps } from "../../components/Wound";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import prisma from "../../lib/prisma";
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import styled from "@emotion/styled";
+import { Box, Container, Typography } from "@mui/material";
 import StyledButton from "../../components/FormComponents/StyledButton";
+import { Session } from "next-auth";
+import UnauthorizedPage from "../../components/Unauthorized";
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps = async (context) => {
+  const { params } = context;
+  const session = await getSession(context);
   const wound = await prisma.wound.findUnique({
     where: {
       id: String(params?.id),
@@ -29,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   });
   return {
-    props: wound,
+    props: { wound, session },
   };
 };
 
@@ -40,47 +35,50 @@ async function deleteWound(id: string): Promise<void> {
   Router.push("/");
 }
 
-const Wound: React.FC<WoundProps> = (props) => {
-  const { data: session, status } = useSession();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+type Props = {
+  wound: WoundProps;
+  session: Session;
+};
 
-  if (status === "loading") {
-    return <div>Authenticating...</div>;
+const Wound: React.FC<Props> = (props) => {
+  const woundBelongsToUser =
+    props.session?.user?.email === props.wound?.author?.email;
+
+  if (!props.session || !woundBelongsToUser) {
+    return <UnauthorizedPage />;
   }
-  const userHasValidSession = Boolean(session);
-  const woundBelongsToUser = session?.user?.email === props.author?.email;
 
   return (
     <Layout>
       <Container>
         <Typography
           variant="h2"
-          sx={{ fontSize: isMobile ? "1.5rem" : "2.5rem" }}
+          sx={{ fontSize: { xs: "1.5rem", md: "2.5rem" } }}
         >
-          Type: {props.type}
+          Type: {props.wound?.type}
         </Typography>
         <Typography
           variant="h3"
-          sx={{ fontSize: isMobile ? "1.2rem" : "2rem" }}
+          sx={{ fontSize: { xs: "1.2rem", md: "2rem" } }}
         >
-          Location: {props.location}
+          Location: {props.wound?.location}
         </Typography>
         <Typography
           variant="body1"
-          sx={{ fontSize: isMobile ? "1rem" : "1.2rem" }}
+          sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
         >
-          Author: {props?.author?.name || "Unknown author"}
+          Author: {props?.wound?.author?.name || "Unknown author"}
         </Typography>
-        <ReactMarkdown children={props.note} />
-        {userHasValidSession && woundBelongsToUser && (
-          <Box sx={{ display: "flex", gap: 2 }}>
-            <StyledButton onClick={() => deleteWound(props.id)}>
-              Delete
-            </StyledButton>
-            <StyledButton href={`/wound/edit/${props.id}`}>Edit</StyledButton>
-          </Box>
-        )}
+        <Typography variant="body2">{props.wound?.note}</Typography>
+
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <StyledButton onClick={() => deleteWound(props.wound?.id)}>
+            Delete
+          </StyledButton>
+          <StyledButton href={`/wound/edit/${props.wound?.id}`}>
+            Edit
+          </StyledButton>
+        </Box>
       </Container>
     </Layout>
   );

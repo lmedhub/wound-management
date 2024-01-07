@@ -1,4 +1,11 @@
-import { MenuItem, Box, Container, Typography } from "@mui/material";
+import {
+  MenuItem,
+  Box,
+  Container,
+  Typography,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import BacksideHuman from "./BacksideHuman";
@@ -13,18 +20,27 @@ import Image from "next/image";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 import * as yup from "yup";
+import { useRouter } from "next/router";
 
 const Form = styled("form")`
   display: flex;
   flex-direction: column;
 `;
 
-export default function WoundForm({ submitData, existingData = null }) {
-  interface FormData {
-    type: string;
-    location: string;
-    note: string;
+const SelectInputLabel = styled(InputLabel)`
+  &.MuiInputLabel-shrink {
+    display: none;
   }
+`;
+
+interface FormData {
+  type: string;
+  location: string;
+  note: string;
+}
+
+export default function WoundForm({ submitData, existingData = null }) {
+  const router = useRouter();
 
   const schema = yup.object({
     type: yup.string().required("Type is required"),
@@ -41,13 +57,11 @@ export default function WoundForm({ submitData, existingData = null }) {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      type: existingData?.props?.type,
-      location: existingData?.props?.location,
-      note: existingData?.props?.note || "",
+      type: existingData?.type,
+      location: existingData?.location,
+      note: existingData?.note || "",
     },
   });
-
-  console.log(existingData);
 
   const handleLocationChange = (newLocation: string) => {
     setValue("location", newLocation);
@@ -59,26 +73,35 @@ export default function WoundForm({ submitData, existingData = null }) {
         <Typography variant="h4">
           {existingData ? "Edit wound" : "Create new wound"}
         </Typography>
-
         <Controller
           name="type"
           control={control}
           defaultValue=""
           render={({ field }) => (
             <>
-              <StyledSelect {...field} variant="standard">
-                <MenuItem value="" disabled>
-                  Select type of wound
-                </MenuItem>
-                <MenuItem value="Abrasion">Abrasion</MenuItem>
-                <MenuItem value="Laceration">Laceration</MenuItem>
-                <MenuItem value="Incision">Incision</MenuItem>
-                <MenuItem value="Puncture">Puncture</MenuItem>
-                <MenuItem value="Avulsion">Avulsion</MenuItem>
-                <MenuItem value="Contusion">Contusion (Bruise)</MenuItem>
-                <MenuItem value="Fracture">Fracture</MenuItem>
-                <MenuItem value="Internal Bleeding">Internal Bleeding</MenuItem>
-              </StyledSelect>
+              <InputLabel>Type</InputLabel>
+              <FormControl>
+                <SelectInputLabel disableAnimation id="selectLabel">
+                  Choose the type of wound
+                </SelectInputLabel>
+                <StyledSelect
+                  {...field}
+                  labelId="selectLabel"
+                  label="Choose the type of wound"
+                  variant="standard"
+                >
+                  <MenuItem value="Abrasion">Abrasion</MenuItem>
+                  <MenuItem value="Laceration">Laceration</MenuItem>
+                  <MenuItem value="Incision">Incision</MenuItem>
+                  <MenuItem value="Puncture">Puncture</MenuItem>
+                  <MenuItem value="Avulsion">Avulsion</MenuItem>
+                  <MenuItem value="Contusion">Contusion (Bruise)</MenuItem>
+                  <MenuItem value="Fracture">Fracture</MenuItem>
+                  <MenuItem value="Internal Bleeding">
+                    Internal Bleeding
+                  </MenuItem>
+                </StyledSelect>
+              </FormControl>
               {errors.type && <ErrorText>{errors.type.message}</ErrorText>}
             </>
           )}
@@ -89,9 +112,10 @@ export default function WoundForm({ submitData, existingData = null }) {
           defaultValue=""
           render={({ field }) => (
             <>
+              <InputLabel>Location</InputLabel>
               <StyledTextField
                 {...field}
-                placeholder="Location"
+                placeholder="Choose the wound location on the body"
                 type="text"
                 value={field.value}
                 InputProps={{
@@ -155,27 +179,32 @@ export default function WoundForm({ submitData, existingData = null }) {
             />
           </Box>
         </Box>
-
         <Controller
           name="note"
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <StyledTextField
-              {...field}
-              placeholder="Notes"
-              type="text"
-              value={field.value}
-              variant="standard"
-            />
+            <>
+              <InputLabel>Notes</InputLabel>
+              <StyledTextField
+                multiline
+                {...field}
+                placeholder="Notes"
+                type="text"
+                value={field.value}
+                variant="standard"
+              />
+            </>
           )}
-        />
-        <StyledButton type="submit" disabled={Object.keys(errors).length > 0}>
-          {existingData ? "Edit" : "Create"}
-        </StyledButton>
-        <a className="back" href="#" onClick={() => console.log("Cancel")}>
-          or Cancel
-        </a>
+        />{" "}
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <StyledButton onClick={() => router.back()} type="submit">
+            Cancel
+          </StyledButton>
+          <StyledButton type="submit" disabled={Object.keys(errors).length > 0}>
+            {existingData ? "Edit Wound" : "Create New Wound"}
+          </StyledButton>
+        </Box>
       </Form>
     </Container>
   );

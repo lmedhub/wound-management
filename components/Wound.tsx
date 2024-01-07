@@ -22,7 +22,7 @@ const StyledWoundCard = styled(Card)`
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #f5f5f5; /* Add your desired hover background color */
+      background-color: #f5f5f5;
     }
 
     .notes {
