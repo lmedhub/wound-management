@@ -8,8 +8,10 @@ export default async function handler(req, res) {
   }
 
   const { message } = req.body;
+  
+  const keyFilePath = Path.join(process.cwd(), "assets/medhub-410516-67f1f2732e15.json");
   const sessionClient = new SessionsClient({
-    keyFilename: Path.join("assets/medhub-410516-67f1f2732e15.json"), 
+    keyFilename: keyFilePath,
   });
 
   const sessionPath = sessionClient.projectAgentSessionPath(
@@ -20,12 +22,12 @@ export default async function handler(req, res) {
   // The dialogflow request object
   const request = {
     session: sessionPath,
-     queryInput: {
-    text: {
-      text: message,
-      languageCode: "en-US", 
+    queryInput: {
+      text: {
+        text: message,
+        languageCode: "en-US", 
+      },
     },
-  },
   };
 
   try {
