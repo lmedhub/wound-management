@@ -6,9 +6,11 @@ import WoundList from "../components/WoundList";
 import { Typography } from "@mui/material";
 import { getSession } from "next-auth/react";
 import UnauthorizedPage from "../components/Unauthorized";
+import { Session } from "next-auth";
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const session = await getSession(context);
+  console.log(session);
   const allWounds = await prisma.wound.findMany({
     include: {
       author: {
@@ -18,19 +20,20 @@ export const getStaticProps = async (context) => {
   });
   return {
     props: { allWounds, session },
-    revalidate: 100,
   };
 };
 
 type Props = {
   allWounds: WoundProps[];
-  session: any;
+  session: Session;
 };
 
 const AllWounds: React.FC<Props> = (props) => {
-  if (!props.session || props.session.role !== "ADMIN") {
+  if (!props?.session || props?.session?.user?.role !== "ADMIN") {
     return <UnauthorizedPage />;
   }
+
+  console.log(props.session);
 
   return (
     <Layout>
