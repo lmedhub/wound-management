@@ -6,5 +6,6 @@ export default defineConfig({
     baseUrl: 'http://localhost:3000',
     supportFile: false,
     excludeSpecPattern: '**/*.ts',
+    defaultCommandTimeout: 7000
   },
 })

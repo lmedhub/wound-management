@@ -90,12 +90,13 @@ export default function WoundForm({ submitData, existingData = null }) {
                 </SelectInputLabel>
                 <StyledSelect
                   {...field}
+                  id="selectTypeId"
                   labelId="selectLabel"
                   label={t("typeselectlabel")}
                   variant="standard"
                 >
                   <MenuItem value="Abrasion">
-                    {t("woundTypes.Abration")}
+                    {t("woundTypes.Abrasion")}
                   </MenuItem>
                   <MenuItem value="Laceration">
                     {t("woundTypes.Laceration")}
@@ -132,10 +133,11 @@ export default function WoundForm({ submitData, existingData = null }) {
             <>
               <InputLabel>{t("location")}</InputLabel>
               <StyledTextField
+                id="notesTextFieldId"
                 {...field}
                 placeholder={t("locationplaceholder")}
                 type="text"
-                value={t(`bodyPart.${field.value}`)}
+                value={field.value && t(`bodyPart.${field.value}`)}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -214,9 +216,9 @@ export default function WoundForm({ submitData, existingData = null }) {
               />
             </>
           )}
-        />{" "}
+        />
         <Box sx={{ display: "flex", gap: 2 }}>
-          <StyledButton onClick={() => router.back()} type="submit">
+          <StyledButton onClick={() => router.back()}>
             {t("cancel")}
           </StyledButton>
           <StyledButton type="submit" disabled={Object.keys(errors).length > 0}>
