@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Layout from "../components/Layout";
 import { WoundProps } from "../components/Wound";
 import prisma from "../lib/prisma";
-import { Typography } from "@mui/material";
 import WoundList from "../components/WoundList";
 import { getSession } from "next-auth/react";
 import UnauthorizedPage from "../components/Unauthorized";

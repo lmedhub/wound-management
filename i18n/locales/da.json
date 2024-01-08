@@ -23,6 +23,11 @@
   "selectLanguage": "Vælg sprog",
   "changethemebutton": "Skift tema",
 
+  "woundstats": "Sårostatisik",
+  "typecounts": "Antal af sårtyper",
+  "locationcounts": "Antal af sårplaceringer",
+  "statsbutton": "Statistik",
+
   "unauthorized": "Uautoriseret adgang",
   "needauth": "Du skal have autorisation for at få adgang til denne side.",
 

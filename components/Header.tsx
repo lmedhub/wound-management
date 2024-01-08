@@ -17,6 +17,7 @@ import { Button, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { ColorModeContext } from "../providers/colorTheme";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 const Header: React.FC = () => {
   const router = useRouter();
@@ -97,17 +98,26 @@ const Header: React.FC = () => {
                   <Typography textAlign="center">{t("mywounds")}</Typography>
                 </MenuItem>
               </Link>
+              <Link href="/wound/create">
+                <MenuItem>
+                  <Typography textAlign="center">{t("newwound")}</Typography>
+                </MenuItem>
+              </Link>
               {session?.user?.role === "ADMIN" && (
                 <Link href={"/allwounds"}>
                   <MenuItem onClick={handleCloseNavMenu}>
+                    <AdminPanelSettingsIcon fontSize="small" sx={{ mr: 1 }} />
                     <Typography textAlign="center">{t("allwounds")}</Typography>
                   </MenuItem>
                 </Link>
               )}
-              {session && (
-                <Link href="/wound/create">
-                  <MenuItem>
-                    <Typography textAlign="center">{t("newwound")}</Typography>
+              {session?.user?.role === "ADMIN" && (
+                <Link href={"/statistics"}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">
+                      <AdminPanelSettingsIcon fontSize="small" sx={{ mr: 1 }} />
+                      {t("statsbutton")}
+                    </Typography>
                   </MenuItem>
                 </Link>
               )}
@@ -139,15 +149,34 @@ const Header: React.FC = () => {
             <Link href={"/mywounds"}>
               <Button color="inherit">{t("mywounds")}</Button>
             </Link>
-            {session?.user?.role === "ADMIN" && (
-              <Link href={"/allwounds"}>
-                <Button color="inherit">{t("allwounds")}</Button>
-              </Link>
-            )}
 
             <Link href={"/wound/create"}>
               <Button color="inherit">{t("newwound")}</Button>
             </Link>
+
+            {session?.user?.role === "ADMIN" && (
+              <Link href={"/allwounds"}>
+                <Button
+                  startIcon={<AdminPanelSettingsIcon fontSize="small" />}
+                  color="inherit"
+                >
+                  {t("allwounds")}
+                </Button>
+              </Link>
+            )}
+
+            {session?.user?.role === "ADMIN" && (
+              <Link href={"/statistics"}>
+                <Button
+                  startIcon={
+                    <AdminPanelSettingsIcon fontSize="small" color="inherit" />
+                  }
+                  color="inherit"
+                >
+                  {t("statsbutton")}
+                </Button>
+              </Link>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0, display: "flex", flexDirection: "row" }}>
