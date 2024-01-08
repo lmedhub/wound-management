@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,13 +13,16 @@ import Container from "@mui/material/Container";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
-import { Button } from "@mui/material";
+import { Button, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { ColorModeContext } from "../providers/colorTheme";
 
 const Header: React.FC = () => {
   const router = useRouter();
   const { t } = useTranslation();
+  const colorMode = useContext(ColorModeContext);
+  const theme = useTheme();
   const { data: session } = useSession();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -194,6 +197,11 @@ const Header: React.FC = () => {
               )}
               <MenuItem>
                 <LanguageSwitcher />
+              </MenuItem>
+              <MenuItem>
+                <Button onClick={colorMode.toggleColorMode}>
+                  Change theme
+                </Button>
               </MenuItem>
             </Menu>
           </Box>

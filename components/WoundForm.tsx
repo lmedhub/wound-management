@@ -217,7 +217,7 @@ export default function WoundForm({ submitData, existingData = null }) {
             </>
           )}
         />
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Box sx={{ display: "flex", gap: 2, justifyContent: "end" }}>
           <StyledButton onClick={() => router.back()}>
             {t("cancel")}
           </StyledButton>

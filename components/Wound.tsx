@@ -22,10 +22,6 @@ const StyledWoundCard = styled(Card)`
     cursor: pointer;
     transition: background-color 0.3s;
 
-    &:hover {
-      background-color: #f5f5f5;
-    }
-
     .notes {
       overflow: hidden;
       text-overflow: ellipsis;
