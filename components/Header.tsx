@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Container from "@mui/material/Container";
@@ -15,16 +14,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header: React.FC = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const { data: session } = useSession();
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -48,12 +46,11 @@ const Header: React.FC = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/mywounds"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -93,28 +90,33 @@ const Header: React.FC = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {session && (
-                <Link href="/wound/create">
-                  <MenuItem>
-                    <Typography textAlign="center">New Wound</Typography>
+              <Link href={"/mywounds"}>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{t("mywounds")}</Typography>
+                </MenuItem>
+              </Link>
+              {session?.user?.role === "ADMIN" && (
+                <Link href={"/allwounds"}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{t("allwounds")}</Typography>
                   </MenuItem>
                 </Link>
               )}
-
-              <Link href={"/"}>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">All wounds</Typography>
-                </MenuItem>
-              </Link>
+              {session && (
+                <Link href="/wound/create">
+                  <MenuItem>
+                    <Typography textAlign="center">{t("newwound")}</Typography>
+                  </MenuItem>
+                </Link>
+              )}
             </Menu>
           </Box>
 
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="/"
+            href="/mywounds"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -132,17 +134,17 @@ const Header: React.FC = () => {
           <Box
             sx={{ gap: 1, flexGrow: 1, display: { xs: "none", md: "flex" } }}
           >
-            <Link href={"/"}>
-              <Button color="inherit">My wounds</Button>
+            <Link href={"/mywounds"}>
+              <Button color="inherit">{t("mywounds")}</Button>
             </Link>
             {session?.user?.role === "ADMIN" && (
               <Link href={"/allwounds"}>
-                <Button color="inherit">All wounds</Button>
+                <Button color="inherit">{t("allwounds")}</Button>
               </Link>
             )}
 
             <Link href={"/wound/create"}>
-              <Button color="inherit">New wound</Button>
+              <Button color="inherit">{t("newwound")}</Button>
             </Link>
           </Box>
 
@@ -172,14 +174,27 @@ const Header: React.FC = () => {
               onClose={handleCloseUserMenu}
             >
               {session ? (
-                <MenuItem onClick={() => signOut()}>
-                  <Typography textAlign="center">Logout</Typography>
+                <MenuItem
+                  onClick={() =>
+                    signOut({ redirect: false }).then(() => {
+                      router.push("/api/auth/signin");
+                    })
+                  }
+                >
+                  <Typography textAlign="center">
+                    <Button>Log out</Button>
+                  </Typography>
                 </MenuItem>
               ) : (
                 <MenuItem>
-                  <Link href="/api/auth/signin">Log in</Link>
+                  <Link href="/api/auth/signin">
+                    <Button>Log in</Button>
+                  </Link>
                 </MenuItem>
               )}
+              <MenuItem>
+                <LanguageSwitcher />
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

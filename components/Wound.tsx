@@ -2,6 +2,7 @@ import React from "react";
 import Router from "next/router";
 import { Card, Typography } from "@mui/material";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 export type WoundProps = {
   id: string;
@@ -37,6 +38,7 @@ const StyledWoundCard = styled(Card)`
 
 const Wound: React.FC<{ wound: WoundProps }> = ({ wound }) => {
   const authorName = wound.author ? wound.author.name : "Unknown author";
+  const { t } = useTranslation();
 
   const handleCardClick = () => {
     Router.push("/wound/[id]", `/wound/${wound.id}`);
@@ -44,11 +46,17 @@ const Wound: React.FC<{ wound: WoundProps }> = ({ wound }) => {
 
   return (
     <StyledWoundCard onClick={handleCardClick}>
-      <Typography variant="h6">Type: {wound.type}</Typography>
-      <Typography variant="subtitle1">Location: {wound.location}</Typography>
-      <Typography variant="caption">Author: {authorName}</Typography>
+      <Typography variant="h6">
+        {t("type")}: {t(`woundTypes.${wound.type}`)}
+      </Typography>
+      <Typography variant="subtitle1">
+        {t("location")}: {t(`bodyPart.${wound.location}`)}
+      </Typography>
+      <Typography variant="caption">
+        {t("author")}: {authorName}
+      </Typography>
       <Typography variant="body2" className="notes">
-        {wound.note}
+        {t("notes")}: {wound.note}
       </Typography>
     </StyledWoundCard>
   );

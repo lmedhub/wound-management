@@ -32,7 +32,7 @@ const MyWounds: React.FC<Props> = (props) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      await Router.push("/");
+      await Router.push("/mywounds");
     } catch (error) {
       console.error(error);
     }

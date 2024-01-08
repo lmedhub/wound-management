@@ -1,0 +1,61 @@
+{
+  "mywounds": "My wounds",
+  "allwounds": "All wounds",
+  "newwound": "New wound",
+  
+  "type": "Type",
+  "location": "Location",
+  "author": "Author",
+  "notes": "Notes",
+
+  "delete": "Delete",
+  "edit": "Edit",
+
+  "cancel": "Cancel",
+  "editwound": "Edit wound",
+  "createwound": "Create new wound",
+
+  "help": "Help",
+
+  "language": "English",
+  "languageButton": "Language",
+  "selectLanguage": "Vælg sprog",
+
+  "unauthorized": "Unauthorized Access",
+  "needauth": "You need authorization to access this page.",
+
+  "typeselectlabel": "Choose the type of wound",
+  "locationplaceholder": "Choose the wound location on the body",
+
+  "chatTextLabel": "Type your message",
+
+  "woundTypes": {
+    "Abrasion": "Abrasion",
+    "Laceration": "Laceration",
+    "Incision": "Incision",
+    "Puncture": "Puncture",
+    "Avulsion": "Avulsion",
+    "Contusion": "Contusion",
+    "Fracture": "Fracture",
+    "Internal Bleeding": "Internal Bleeding"
+  },
+  
+  "bodyPart" : {
+    "Back of the feet": "Back of the feet",
+    "Back of the legs": "Back of the legs",
+    "Glutes": "Glutes",
+    "Back of the head": "Back of the head",
+    "Back of the arms": "Back of the arms",
+    "Back of the torso": "Back of the torso",
+    "Front of the feet": "Front of the feet",
+    "Front of the legs": "Front of the legs",
+    "Crotch": "Crotch",
+    "Front of the arms": "Front of the arms",
+    "Front of the head": "Front of the head",
+    "Front of the torso": "Front of the torso"
+  }
+  
+
+
+
+}

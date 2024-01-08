@@ -1,0 +1,56 @@
+{
+  "mywounds": "Mine sår",
+  "allwounds": "Alle sår",
+  "newwound": "Nyt sår",
+  
+  "type": "Type",
+  "location": "Placering",
+  "author": "Forfatter",
+  "notes": "Noter",
+
+  "delete": "Slet",
+  "edit": "Rediger",
+
+  "cancel": "Annuller",
+  "editwound": "Rediger sår",
+  "createwound": "Opret nyt sår",
+
+  "help": "Hjælp",
+
+  "language": "Dansk",
+  "languageButton": "Sprog",
+
+  "unauthorized": "Uautoriseret adgang",
+  "needauth": "Du skal have autorisation for at få adgang til denne side.",
+
+  "typeselectlabel": "Vælg sårtypen",
+  "locationplaceholder": "Vælg sårets placering på kroppen",
+
+  "chatTextLabel": "Skriv din besked (Engelsk)",
+
+  "woundTypes": {
+    "Abrasion": "Abrasion",
+    "Laceration": "Laceration",
+    "Incision": "Incision",
+    "Puncture": "Puncture",
+    "Avulsion": "Avulsion",
+    "Contusion": "Contusion (Blå mærke)",
+    "Fracture": "Fracture",
+    "Internal Bleeding": "Indre blødning"
+  },
+
+  "bodyPart": {
+    "Back of the feet": "Bagsiden af fødderne",
+    "Back of the legs": "Bagsiden af benene",
+    "Glutes": "Balder",
+    "Back of the head": "Bagsiden af hovedet",
+    "Back of the arms": "Bagsiden af armene",
+    "Back of the torso": "Bagsiden af overkroppen",
+    "Front of the feet": "Forsiden af fødderne",
+    "Front of the legs": "Forsiden af benene",
+    "Crotch": "Skridtet",
+    "Front of the arms": "Forsiden af armene",
+    "Front of the head": "Forsiden af hovedet",
+    "Front of the torso": "Forsiden af overkroppen"
+  }
+}

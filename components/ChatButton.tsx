@@ -1,9 +1,11 @@
 // FloatingButton.js
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import ChatComponent from "./ChatComponent"; // Update the path accordingly
+import ChatComponent from "./ChatComponent";
+import { useTranslation } from "react-i18next";
 
 const FloatingButton = () => {
+  const { t } = useTranslation();
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const toggleChat = () => {
@@ -18,7 +20,7 @@ const FloatingButton = () => {
         onClick={toggleChat}
         sx={{ position: "fixed", bottom: 16, right: 16 }}
       >
-        Help
+        {t("help")}
       </Button>
       {isChatOpen && <ChatComponent onClose={() => setIsChatOpen(false)} />}
     </>

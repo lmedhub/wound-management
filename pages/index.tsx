@@ -1,49 +1,23 @@
-import React, { useState } from "react";
-import Layout from "../components/Layout";
-import { WoundProps } from "../components/Wound";
-import prisma from "../lib/prisma";
-import { Typography } from "@mui/material";
-import WoundList from "../components/WoundList";
 import { getSession } from "next-auth/react";
-import UnauthorizedPage from "../components/Unauthorized";
-import { Session } from "next-auth";
+import { useRouter } from "next/router";
+import React from "react";
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  const myWounds = await prisma.wound.findMany({
-    where: {
-      author: {
-        email: session?.user?.email,
-      },
-    },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
-  });
+
+  if (!session) {
+    context.res.writeHead(302, { Location: "/api/auth/signin" });
+    context.res.end();
+  } else {
+    context.res.writeHead(302, { Location: "/mywounds" });
+    context.res.end();
+  }
 
   return {
-    props: { myWounds, session },
+    props: {},
   };
 };
 
-type Props = {
-  myWounds: WoundProps[];
-  session: Session;
-};
-
-const MyWounds: React.FC<Props> = (props) => {
-  if (!props.session) {
-    return <UnauthorizedPage />;
-  }
-
-  return (
-    <Layout>
-      <Typography variant="h3">My wounds</Typography>
-      <WoundList wounds={props.myWounds} />
-    </Layout>
-  );
-};
-
-export default MyWounds;
+export default function Main() {
+  return <div>Redirecting...</div>;
+}

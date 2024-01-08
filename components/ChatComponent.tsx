@@ -1,4 +1,3 @@
-// ChatComponent.js
 import React, { useState, useEffect } from "react";
 import {
   TextField,
@@ -14,8 +13,10 @@ import {
   Avatar,
 } from "@mui/material";
 import { useSession } from "next-auth/react";
+import { useTranslation } from "react-i18next";
 
 const ChatContent = ({ chatMessages, onSendMessage, onClose }) => {
+  const { t } = useTranslation();
   const [inputMessage, setInputMessage] = useState("");
   const { data: session } = useSession();
 
@@ -108,7 +109,7 @@ const ChatContent = ({ chatMessages, onSendMessage, onClose }) => {
         }}
       >
         <TextField
-          label="Type your message"
+          label={t("chatTextLabel")}
           variant="outlined"
           fullWidth
           value={inputMessage}

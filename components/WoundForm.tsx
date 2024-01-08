@@ -23,6 +23,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 import * as yup from "yup";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 const Form = styled("form")`
   display: flex;
@@ -43,6 +44,7 @@ interface FormData {
 
 export default function WoundForm({ submitData, existingData = null }) {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const schema = yup.object({
     type: yup.string().required("Type is required"),
@@ -73,7 +75,7 @@ export default function WoundForm({ submitData, existingData = null }) {
     <Container>
       <Form onSubmit={handleSubmit(submitData)}>
         <Typography variant="h4">
-          {existingData ? "Edit wound" : "Create new wound"}
+          {existingData ? t("editwound") : t("createwound")}
         </Typography>
         <Controller
           name="type"
@@ -81,26 +83,40 @@ export default function WoundForm({ submitData, existingData = null }) {
           defaultValue=""
           render={({ field }) => (
             <>
-              <InputLabel>Type</InputLabel>
+              <InputLabel>{t("type")}</InputLabel>
               <FormControl>
                 <SelectInputLabel disableAnimation id="selectLabel">
-                  Choose the type of wound
+                  {t("typeselectlabel")}
                 </SelectInputLabel>
                 <StyledSelect
                   {...field}
                   labelId="selectLabel"
-                  label="Choose the type of wound"
+                  label={t("typeselectlabel")}
                   variant="standard"
                 >
-                  <MenuItem value="Abrasion">Abrasion</MenuItem>
-                  <MenuItem value="Laceration">Laceration</MenuItem>
-                  <MenuItem value="Incision">Incision</MenuItem>
-                  <MenuItem value="Puncture">Puncture</MenuItem>
-                  <MenuItem value="Avulsion">Avulsion</MenuItem>
-                  <MenuItem value="Contusion">Contusion (Bruise)</MenuItem>
-                  <MenuItem value="Fracture">Fracture</MenuItem>
+                  <MenuItem value="Abrasion">
+                    {t("woundTypes.Abration")}
+                  </MenuItem>
+                  <MenuItem value="Laceration">
+                    {t("woundTypes.Laceration")}
+                  </MenuItem>
+                  <MenuItem value="Incision">
+                    {t("woundTypes.Incision")}
+                  </MenuItem>
+                  <MenuItem value="Puncture">
+                    {t("woundTypes.Puncture")}
+                  </MenuItem>
+                  <MenuItem value="Avulsion">
+                    {t("woundTypes.Avulsion")}
+                  </MenuItem>
+                  <MenuItem value="Contusion">
+                    {t("woundTypes.Contusion")}
+                  </MenuItem>
+                  <MenuItem value="Fracture">
+                    {t("woundTypes.Fracture")}
+                  </MenuItem>
                   <MenuItem value="Internal Bleeding">
-                    Internal Bleeding
+                    {t("woundTypes.Internal Bleeding")}
                   </MenuItem>
                 </StyledSelect>
               </FormControl>
@@ -114,12 +130,12 @@ export default function WoundForm({ submitData, existingData = null }) {
           defaultValue=""
           render={({ field }) => (
             <>
-              <InputLabel>Location</InputLabel>
+              <InputLabel>{t("location")}</InputLabel>
               <StyledTextField
                 {...field}
-                placeholder="Choose the wound location on the body"
+                placeholder={t("locationplaceholder")}
                 type="text"
-                value={field.value}
+                value={t(`bodyPart.${field.value}`)}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -187,11 +203,11 @@ export default function WoundForm({ submitData, existingData = null }) {
           defaultValue=""
           render={({ field }) => (
             <>
-              <InputLabel>Notes</InputLabel>
+              <InputLabel>{t("notes")}</InputLabel>
               <StyledTextField
                 multiline
                 {...field}
-                placeholder="Notes"
+                placeholder={t("notes")}
                 type="text"
                 value={field.value}
                 variant="standard"
@@ -201,10 +217,10 @@ export default function WoundForm({ submitData, existingData = null }) {
         />{" "}
         <Box sx={{ display: "flex", gap: 2 }}>
           <StyledButton onClick={() => router.back()} type="submit">
-            Cancel
+            {t("cancel")}
           </StyledButton>
           <StyledButton type="submit" disabled={Object.keys(errors).length > 0}>
-            {existingData ? "Edit Wound" : "Create New Wound"}
+            {existingData ? t("editwound") : t("createwound")}
           </StyledButton>
         </Box>
       </Form>
