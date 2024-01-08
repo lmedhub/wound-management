@@ -10,6 +10,7 @@ import StyledButton from "../../components/FormComponents/StyledButton";
 import { Session } from "next-auth";
 import UnauthorizedPage from "../../components/Unauthorized";
 import { useTranslation } from "react-i18next";
+import PageHeader from "../../components/PageHeader";
 
 export const getServerSideProps = async (context) => {
   const { params } = context;
@@ -52,41 +53,37 @@ const Wound: React.FC<Props> = (props) => {
 
   return (
     <Layout>
-      <Container>
-        <Typography
-          variant="h2"
-          sx={{ fontSize: { xs: "1.5rem", md: "2.5rem" } }}
-        >
-          {t("type")}: {t(`woundTypes.${props.wound.type}`)}
-        </Typography>
-        <Typography
-          variant="h3"
-          sx={{ fontSize: { xs: "1.2rem", md: "2rem" } }}
-        >
-          {t("location")}: {t(`bodyPart.${props.wound.location}`)}
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
-        >
-          {t("author")}: {props?.wound?.author?.name || "Unknown author"}
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
-        >
-          {t("notes")}: {props.wound?.note}
-        </Typography>
+      <PageHeader title={t("wounddetails")} />
+      <Typography
+        variant="h2"
+        sx={{ fontSize: { xs: "1.5rem", md: "2.5rem" } }}
+      >
+        {t("type")}: {t(`woundTypes.${props.wound.type}`)}
+      </Typography>
+      <Typography variant="h3" sx={{ fontSize: { xs: "1.2rem", md: "2rem" } }}>
+        {t("location")}: {t(`bodyPart.${props.wound.location}`)}
+      </Typography>
+      <Typography
+        variant="body1"
+        sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
+      >
+        {t("author")}: {props?.wound?.author?.name || "Unknown author"}
+      </Typography>
+      <Typography
+        variant="body2"
+        sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
+      >
+        {t("notes")}: {props.wound?.note}
+      </Typography>
 
-        <Box sx={{ display: "flex", gap: 2, marginTop: 2 }}>
-          <StyledButton onClick={() => deleteWound(props.wound?.id)}>
-            {t("delete")}
-          </StyledButton>
-          <StyledButton href={`/wound/edit/${props.wound?.id}`}>
-            {t("edit")}
-          </StyledButton>
-        </Box>
-      </Container>
+      <Box sx={{ display: "flex", gap: 2, marginTop: 2 }}>
+        <StyledButton onClick={() => deleteWound(props.wound?.id)}>
+          {t("delete")}
+        </StyledButton>
+        <StyledButton href={`/wound/edit/${props.wound?.id}`}>
+          {t("edit")}
+        </StyledButton>
+      </Box>
     </Layout>
   );
 };

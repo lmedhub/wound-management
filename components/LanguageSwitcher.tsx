@@ -8,6 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
+import LanguageIcon from "@mui/icons-material/Language";
 
 export default function LanguageSwitcher() {
   const { i18n, t } = useTranslation();
@@ -33,7 +34,11 @@ export default function LanguageSwitcher() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>{t("languageButton")}</Button>
+      <MenuItem onClick={handleOpen}>
+        <Button startIcon={<LanguageIcon />} onClick={handleOpen}>
+          {t("languageButton")}
+        </Button>
+      </MenuItem>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{t("selectLanguage")}</DialogTitle>
         <DialogContent sx={{ width: "300px" }}>

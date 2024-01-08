@@ -4,7 +4,6 @@ import React from "react";
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  console.log(session);
 
   if (!session) {
     context.res.writeHead(302, { Location: "/api/auth/signin" });

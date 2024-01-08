@@ -14,11 +14,14 @@
   "cancel": "Annuller",
   "editwound": "Rediger sår",
   "createwound": "Opret nyt sår",
+  "wounddetails": "Sårdetaljer",
 
   "help": "Hjælp",
 
   "language": "Dansk",
   "languageButton": "Sprog",
+  "selectLanguage": "Vælg sprog",
+  "changethemebutton": "Skift tema",
 
   "unauthorized": "Uautoriseret adgang",
   "needauth": "Du skal have autorisation for at få adgang til denne side.",

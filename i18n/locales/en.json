@@ -14,12 +14,14 @@
   "cancel": "Cancel",
   "editwound": "Edit wound",
   "createwound": "Create new wound",
+  "wounddetails": "Wound details",
 
   "help": "Help",
 
   "language": "English",
   "languageButton": "Language",
   "selectLanguage": "Select language",
+  "changethemebutton": "Change theme",
 
   "unauthorized": "Unauthorized Access",
   "needauth": "You need authorization to access this page.",

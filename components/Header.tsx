@@ -22,7 +22,6 @@ const Header: React.FC = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const colorMode = useContext(ColorModeContext);
-  const theme = useTheme();
   const { data: session } = useSession();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -176,6 +175,10 @@ const Header: React.FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              <LanguageSwitcher />
+              <MenuItem onClick={colorMode.toggleColorMode}>
+                <Button>{t("changethemebutton")}</Button>
+              </MenuItem>
               {session ? (
                 <MenuItem
                   onClick={() =>
@@ -189,20 +192,12 @@ const Header: React.FC = () => {
                   </Typography>
                 </MenuItem>
               ) : (
-                <MenuItem>
-                  <Link href="/api/auth/signin">
+                <Link href="/api/auth/signin">
+                  <MenuItem>
                     <Button>Log in</Button>
-                  </Link>
-                </MenuItem>
+                  </MenuItem>
+                </Link>
               )}
-              <MenuItem>
-                <LanguageSwitcher />
-              </MenuItem>
-              <MenuItem>
-                <Button onClick={colorMode.toggleColorMode}>
-                  Change theme
-                </Button>
-              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

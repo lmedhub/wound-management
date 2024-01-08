@@ -24,6 +24,8 @@ import styled from "@emotion/styled";
 import * as yup from "yup";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import PageHeader from "./PageHeader";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 const Form = styled("form")`
   display: flex;
@@ -35,12 +37,6 @@ const SelectInputLabel = styled(InputLabel)`
     display: none;
   }
 `;
-
-interface FormData {
-  type: string;
-  location: string;
-  note: string;
-}
 
 export default function WoundForm({ submitData, existingData = null }) {
   const router = useRouter();
@@ -72,11 +68,9 @@ export default function WoundForm({ submitData, existingData = null }) {
   };
 
   return (
-    <Container>
+    <>
       <Form onSubmit={handleSubmit(submitData)}>
-        <Typography variant="h4">
-          {existingData ? t("editwound") : t("createwound")}
-        </Typography>
+        <PageHeader title={existingData ? t("editwound") : t("createwound")} />
         <Controller
           name="type"
           control={control}
@@ -226,6 +220,6 @@ export default function WoundForm({ submitData, existingData = null }) {
           </StyledButton>
         </Box>
       </Form>
-    </Container>
+    </>
   );
 }

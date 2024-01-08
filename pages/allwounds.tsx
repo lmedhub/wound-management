@@ -8,6 +8,7 @@ import { getSession } from "next-auth/react";
 import UnauthorizedPage from "../components/Unauthorized";
 import { Session } from "next-auth";
 import { useTranslation } from "react-i18next";
+import PageHeader from "../components/PageHeader";
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
@@ -37,7 +38,7 @@ const AllWounds: React.FC<Props> = (props) => {
 
   return (
     <Layout>
-      <Typography variant="h3">{t("allwounds")}</Typography>
+      <PageHeader title={t("allwounds")} />
       <WoundList wounds={props.allWounds} />
     </Layout>
   );
