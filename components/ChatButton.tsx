@@ -16,7 +16,6 @@ const FloatingButton = () => {
     <>
       <Button
         variant="contained"
-        color="primary"
         onClick={toggleChat}
         sx={{ position: "fixed", bottom: 16, right: 16 }}
       >

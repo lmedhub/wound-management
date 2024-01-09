@@ -152,6 +152,7 @@ export default function WoundForm({ submitData, existingData = null }) {
             alignItems: "center",
           }}
         >
+          Front side
           <Box
             sx={{
               position: "relative",
@@ -192,6 +193,7 @@ export default function WoundForm({ submitData, existingData = null }) {
               style={{ left: 1, top: 0 }}
             />
           </Box>
+          Back side
         </Box>
         <Controller
           name="note"

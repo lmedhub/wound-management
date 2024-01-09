@@ -17,7 +17,6 @@ export type WoundProps = {
 
 const StyledWoundCard = styled(Card)`
   && {
-    color: inherit;
     padding: 2rem;
     cursor: pointer;
     transition: background-color 0.3s;

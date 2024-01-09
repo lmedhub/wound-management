@@ -9,7 +9,7 @@ const StyledButtonComponent = styled(Button)`
 
 export default function StyledButton({ children, ...props }) {
   return (
-    <StyledButtonComponent color="primary" variant="contained" {...props}>
+    <StyledButtonComponent variant="contained" {...props}>
       {children}
     </StyledButtonComponent>
   );
