@@ -12,6 +12,7 @@ import {
   IconButton,
   Avatar,
 } from "@mui/material";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "react-i18next";
 
@@ -24,6 +25,12 @@ const ChatContent = ({ chatMessages, onSendMessage, onClose }) => {
     if (inputMessage.trim() !== "") {
       onSendMessage(inputMessage);
       setInputMessage("");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
     }
   };
 
@@ -40,6 +47,7 @@ const ChatContent = ({ chatMessages, onSendMessage, onClose }) => {
         right: 0,
         zIndex: 999,
         margin: "10px",
+        width: "350px",
       }}
     >
       <Box
@@ -49,11 +57,12 @@ const ChatContent = ({ chatMessages, onSendMessage, onClose }) => {
           padding: "8px",
         }}
       >
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" sx={{ flexGrow: 1, mx: 1 }}>
           HealthHub Helper
         </Typography>
+
         <IconButton onClick={onClose} style={{ marginRight: "8px" }}>
-          x
+          <CloseOutlinedIcon fontSize="small" />
         </IconButton>
       </Box>
       <Divider />
@@ -114,10 +123,10 @@ const ChatContent = ({ chatMessages, onSendMessage, onClose }) => {
           fullWidth
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
-          inputProps={{ maxLength: 50 }}
+          inputProps={{ maxLength: 75 }}
+          onKeyDown={handleKeyPress}
         />
         <Button
-          type="submit"
           variant="contained"
           onClick={handleSendMessage}
           style={{ marginLeft: "8px" }}
