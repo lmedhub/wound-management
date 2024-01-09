@@ -35,6 +35,8 @@ function Layout(props: Props) {
     []
   );
 
+  console.log(mode);
+
   useEffect(() => {
     localStorage.setItem("colorMode", mode);
   }, [mode]);
@@ -44,6 +46,7 @@ function Layout(props: Props) {
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+
           <Header />
           <Container maxWidth="xl" sx={{ padding: "1rem" }}>
             {props.children}

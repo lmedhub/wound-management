@@ -7,17 +7,17 @@ export const createCustomTheme = (mode: PaletteMode) => {
     palette: {
       mode,
       primary: {
-        main: mode === "dark" ? "#fff" : grey[900],
+        main: mode === "dark" ? "#fff !important" : "#212121 !important",
       },
       secondary: {
-        main: grey[500],
+        main: "#9e9e9e !important",
       },
       background: {
-        default: mode === "dark" ? "#000" : "#fff",
+        default: mode === "dark" ? "#000 !important" : "#fff !important",
       },
       text: {
-        primary: mode === "dark" ? "#fff" : "#000",
-        secondary: grey[500],
+        primary: mode === "dark" ? "#fff !important" : "#000 !important",
+        secondary: "#9e9e9e !important",
       },
     },
   });

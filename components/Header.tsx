@@ -43,10 +43,8 @@ const Header: React.FC = () => {
     setAnchorElUser(null);
   };
 
-  const isActive = (pathname: string) => router.pathname === pathname;
-
   return (
-    <AppBar position="static">
+    <AppBar position="static" color={"background" as any}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -144,7 +142,12 @@ const Header: React.FC = () => {
           </Typography>
 
           <Box
-            sx={{ gap: 1, flexGrow: 1, display: { xs: "none", md: "flex" } }}
+            sx={{
+              color: "primary",
+              gap: 1,
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+            }}
           >
             <Link href={"/mywounds"}>
               <Button color="inherit">{t("mywounds")}</Button>
