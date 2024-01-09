@@ -1,6 +1,6 @@
 # HealthHub
 
-HealthHub is an advanced wound management system that empowers users to seamlessly manage a list of wounds with features such as addition, editing, and deletion. Hosted on [Vercel](https://vercel.com/), the application encompasses robust functionalities including authentication, administrator tools, insightful statistics charts, support for English and Danish languages, light/dark color modes, and an integrated support chatbot.
+HealthHub is an advanced wound management system that empowers users to seamlessly manage a list of wounds with features such as addition, editing, and deletion. Hosted on Vercel, the application encompasses robust functionalities including authentication, administrator tools, insightful statistics charts, support for English and Danish languages, light/dark color modes, and an integrated support chatbot.
 
 ## Technologies Utilized:
 
