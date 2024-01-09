@@ -1,9 +1,10 @@
 // components/UnauthorizedPage.js
 
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useRouter } from "next/router";
 import StyledButton from "./FormComponents/StyledButton";
+import { useTranslation } from "react-i18next";
 
 const UnauthorizedContainer = styled(Container)({
   display: "flex",
@@ -11,9 +12,11 @@ const UnauthorizedContainer = styled(Container)({
   alignItems: "center",
   justifyContent: "center",
   minHeight: "100vh",
+  gap: 2,
 });
 
 function UnauthorizedPage() {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const handleSignupClick = () => {
@@ -22,11 +25,13 @@ function UnauthorizedPage() {
 
   return (
     <UnauthorizedContainer>
-      <Typography variant="h4">Unauthorized Access</Typography>
-      <Typography variant="body1">
-        You need authorization to access this page.
-      </Typography>
-      <StyledButton onClick={handleSignupClick}>Login</StyledButton>
+      <Typography variant="h4">{t("unauthorized")}</Typography>
+      <Typography variant="body1">{t("needauth")}</Typography>
+      <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
+        {" "}
+        <StyledButton onClick={router.back}>{t("backbutton")}</StyledButton>
+        <StyledButton onClick={handleSignupClick}>Login</StyledButton>
+      </Box>
     </UnauthorizedContainer>
   );
 }

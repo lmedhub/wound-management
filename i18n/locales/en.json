@@ -25,6 +25,7 @@
 
   "unauthorized": "Unauthorized Access",
   "needauth": "You need authorization to access this page.",
+  "backbutton": "Go back",
 
   "typeselectlabel": "Choose the type of wound",
   "locationplaceholder": "Choose the wound location on the body",

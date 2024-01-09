@@ -36,6 +36,7 @@
 
   "unauthorized": "Uautoriseret adgang",
   "needauth": "Du skal have autorisation for at få adgang til denne side.",
+  "backbutton": "Gå tilbage",
 
   "typeselectlabel": "Vælg sårtypen",
   "locationplaceholder": "Vælg sårets placering på kroppen",
