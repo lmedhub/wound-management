@@ -39,6 +39,9 @@
   "frontside": "Front side",
   "backside": "Back side",
 
+  "nodatadisplay": "There are no items to display at the moment.",
+  "nodata": "No items available",
+
   "woundTypes": {
     "Abrasion": "Abrasion",
     "Laceration": "Laceration",

@@ -8,6 +8,7 @@ import UnauthorizedPage from "../components/Unauthorized";
 import { Session } from "next-auth";
 import { useTranslation } from "react-i18next";
 import PageHeader from "../components/PageHeader";
+import EmptyData from "../components/EmptyData";
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
@@ -39,6 +40,10 @@ const MyWounds: React.FC<Props> = (props) => {
 
   if (!props.session) {
     return <UnauthorizedPage />;
+  }
+
+  if (props.myWounds.length === 0) {
+    return <EmptyData />;
   }
 
   return (

@@ -1,6 +1,6 @@
 // components/UnauthorizedPage.js
 
-import { Button, Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useRouter } from "next/router";
 import StyledButton from "./FormComponents/StyledButton";
