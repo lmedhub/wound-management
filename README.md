@@ -2,6 +2,10 @@
 
 HealthHub is an advanced wound management system that empowers users to seamlessly manage a list of wounds with features such as addition, editing, and deletion. Hosted on Vercel, the application encompasses robust functionalities including authentication, administrator tools, insightful statistics charts, support for English and Danish languages, light/dark color modes, and an integrated support chatbot.
 
+User accounts in the system can assume one of two roles: "Admin" or "User". For testing purposes, newly created accounts are automatically assigned the "Admin" role. Users have the ability to view, edit, and delete their own wounds. On the other hand, administrators possess broader access, being able to view all wounds across all users. Additionally, administrators have access to a comprehensive statistics dashboard, providing an overview of relevant data.
+
+The Chatbot is designed to respond to inquiries regarding the usability of the website, addressing questions like "How to add a wound?". Despite being trained with a limited number of phrases initially, it demonstrates high scalability and can respond effectively to diverse forms of the same question, contributing to a user-friendly experience.
+
 [Live production application](https://wound-management-sigma.vercel.app/)
 
 ## Technologies Utilized:
