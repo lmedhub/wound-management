@@ -1,11 +1,10 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
 import Router from "next/router";
 import Layout from "../../components/Layout";
 import { WoundProps } from "../../components/Wound";
 import { getSession, useSession } from "next-auth/react";
 import prisma from "../../lib/prisma";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import StyledButton from "../../components/FormComponents/StyledButton";
 import { Session } from "next-auth";
 import UnauthorizedPage from "../../components/Unauthorized";

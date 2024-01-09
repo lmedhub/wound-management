@@ -36,6 +36,9 @@
   "locationcounts": "Wound Location Counts",
   "statsbutton": "Statistics",
 
+  "frontside": "Forside",
+  "backside": "Bagside",
+
   "woundTypes": {
     "Abrasion": "Abrasion",
     "Laceration": "Laceration",

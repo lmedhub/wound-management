@@ -150,10 +150,6 @@ const ChatComponent = ({ onClose }) => {
         body: JSON.stringify({ message: userMessage }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to communicate with the chatbot");
-      }
-
       const responseData = await response.json();
       const botReply =
         responseData.data[0]?.queryResult?.fulfillmentText ||
@@ -168,8 +164,6 @@ const ChatComponent = ({ onClose }) => {
       console.error("Error sending message to chatbot:", error);
     }
   };
-
-  console.log(chatMessages);
 
   return (
     <Box>
