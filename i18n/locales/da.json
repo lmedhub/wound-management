@@ -28,6 +28,9 @@
   "locationcounts": "Antal af sårplaceringer",
   "statsbutton": "Statistik",
 
+  "frontside": "Forside",
+  "backside": "Bagside",
+
   "unauthorized": "Uautoriseret adgang",
   "needauth": "Du skal have autorisation for at få adgang til denne side.",
 
@@ -35,6 +38,7 @@
   "locationplaceholder": "Vælg sårets placering på kroppen",
 
   "chatTextLabel": "Skriv din besked (Engelsk)",
+
 
   "woundTypes": {
     "Abrasion": "Abrasion",
