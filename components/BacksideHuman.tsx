@@ -15,7 +15,7 @@ export default function BacksideHuman({ onLocationChange, location }) {
       >
         <g
           name="feet"
-          fill={location === "Back of the feet" ? "#FF4500" : "#F08239"}
+          fill={location === "Back of the feet" ? "#FF0000" : "#F08239"}
           onClick={() => onLocationChange("Back of the feet")}
         >
           <path
@@ -29,7 +29,7 @@ export default function BacksideHuman({ onLocationChange, location }) {
         </g>
         <g
           name="legs"
-          fill={location === "Back of the legs" ? "#FF4500" : "#F08239"}
+          fill={location === "Back of the legs" ? "#FF0000" : "#F08239"}
           onClick={() => onLocationChange("Back of the legs")}
         >
           <path
@@ -75,7 +75,7 @@ export default function BacksideHuman({ onLocationChange, location }) {
         </g>
         <g
           name="glutes"
-          fill={location === "Glutes" ? "#FF4500" : "#F08239"}
+          fill={location === "Glutes" ? "#FF0000" : "#F08239"}
           onClick={() => onLocationChange("Glutes")}
         >
           <path
@@ -93,7 +93,7 @@ export default function BacksideHuman({ onLocationChange, location }) {
         </g>
         <g
           name="head"
-          fill={location === "Back of the head" ? "#FF4500" : "#F08239"}
+          fill={location === "Back of the head" ? "#FF0000" : "#F08239"}
           onClick={() => onLocationChange("Back of the head")}
         >
           <path
@@ -107,7 +107,7 @@ export default function BacksideHuman({ onLocationChange, location }) {
         </g>
         <g
           name="backArms"
-          fill={location === "Back of the arms" ? "#FF4500" : "#F08239"}
+          fill={location === "Back of the arms" ? "#FF0000" : "#F08239"}
           onClick={() => onLocationChange("Back of the arms")}
         >
           <path
@@ -146,7 +146,7 @@ export default function BacksideHuman({ onLocationChange, location }) {
 
         <g
           name="backTorso"
-          fill={location === "Back of the torso" ? "#FF4500" : "#F08239"}
+          fill={location === "Back of the torso" ? "#FF0000" : "#F08239"}
           onClick={() => onLocationChange("Back of the torso")}
         >
           <path

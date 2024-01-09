@@ -117,6 +117,7 @@ const ChatContent = ({ chatMessages, onSendMessage, onClose }) => {
           inputProps={{ maxLength: 50 }}
         />
         <Button
+          type="submit"
           variant="contained"
           onClick={handleSendMessage}
           style={{ marginLeft: "8px" }}
@@ -159,14 +160,16 @@ const ChatComponent = ({ onClose }) => {
     }
   };
 
+  console.log(chatMessages);
+
   return (
-    <div>
+    <Box>
       <ChatContent
         onClose={onClose}
         chatMessages={chatMessages}
         onSendMessage={sendMessageToChatbot}
       />
-    </div>
+    </Box>
   );
 };
 
