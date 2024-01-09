@@ -24,7 +24,7 @@
   "changethemebutton": "Change theme",
 
   "unauthorized": "Unauthorized Access",
-  "needauth": "You need authorization to access this page.",
+  "needauth": "You don't have authorization to access this page.",
   "backbutton": "Go back",
 
   "typeselectlabel": "Choose the type of wound",

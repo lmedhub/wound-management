@@ -46,7 +46,10 @@ const Wound: React.FC<Props> = (props) => {
   const woundBelongsToUser =
     props.session?.user?.email === props.wound?.author?.email;
 
-  if (!props.session || !woundBelongsToUser) {
+  if (
+    props.session.user.role !== "ADMIN" &&
+    (!props.session || !woundBelongsToUser)
+  ) {
     return <UnauthorizedPage />;
   }
 
