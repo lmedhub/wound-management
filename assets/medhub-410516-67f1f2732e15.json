@@ -1,13 +1,1 @@
-{
-  "type": "service_account",
-  "project_id": "medhub-410516",
-  "private_key_id": "67f1f2732e15b0d69849a6678c65ef4b0d29654e",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCthbP0zRoVdvW3\nsKiYHt79xgXJArvnMIiarM/lnA4vviYntZnzjfjBC8H8qzScNcI5H8VVv23UAdLc\nV2XKf0jBzzAGoNlX1YKqRHXgAk3PCwOT5R/A9MDIau5F4+f97MsloF9uZNu9Y052\nlMVZh/9KLE4IveKKJThCrq2pDAHTbmfXGPB58DcSn1ibLC5hpLBSFJs5NuvcVIeD\nS1JZfRyKAZI64RiMfa9r3HW+Rb7YB3AQTm4IqOZrwugpRsdTw31iLYCpCJqH0dU/\nu8qmaymncNchmCXuXCfagLNZV+TbrspTuFFvEj7CxTkIDU1AL6SRPua7sAO4PSNb\nDIL3kSOVAgMBAAECggEACyS8vZIlZG7/ETSgYyKKZgg/S10oVYzFnQ9Pi5qVw6Wl\nvCOatywtJzKa2t/g0U5XgoUijmLsifKzCLD5KcO6V633UtmmE5Cz4zzhyAjF1+/I\nY0lR3HmrXsOVOTpNZf58vlYaAtQp03QK8C0WLm2ALNKDEWcmYwJIZmni36oUfPAt\nW1NgmjSXQr4t9Va6NKfpmXC0q5W4M1gu6/0+tyB4Dqy3BzIcP553VEwsdjczX00m\n3bhn6+Wz31Y2dIW3YxCjyOWJfVssZrG9nB3xc8EPafoBhpi10l7MNU1jjJFQIvJV\nE1t3qG7ZEgr1MdENIOGQOglMa9QnRAMMXv6iNR0+oQKBgQDTmvvt1vniEbrU4bSh\nv8m5eeWoClOY1ElNF9P4InO7qt2753URuV5S6p76YxV3X+J9JTQeWqt+5qUFXYh/\nRsWQ/Wb6QMNT5YdJSeBaATA33i2fYv83i8RX87hWKIteej14KKwMsPht2konU4P6\n94xO5mtkKVa1GPFoclm/rJu0YQKBgQDR7VRxKr5nqBsjkr17Hx5b1teFgxPQwRE/\nu0ZIuF8GYn3csAVHweFtw2cxRvwOFIaQW7CSif0dP9yOfg744l3erN1fOhQsiFcm\nSKM/hEb2aB0YWizRjIKEsx7d/dnB3hdvOzWwm5T4+9JTB86XCTsWjfplOxMfr2kl\nfPXm79B7tQKBgFavx0VILFZQrRlI3Zbl2t4A8fRFRrn1PZI3kL62XnMjLHMt/uej\n6OBO/ZHVxZWB0mcyNoe43Ui/dBseliyN8aHULbuXjG1yOlnryd0VX4uDmW0SQTug\nJm9hiMLDGVU6/rOa9eC9HwjhxD8YF5lYkEJCYvxFcx/9d+gx8FJ1g9QBAoGAOi3v\nMCnreSji1JoPf3bhYAyL0InCTSGk2Sfa076dP1S+kxIJdJisFFKKX+LPakuP+6Qd\nrI8nohqX0rnnBl0eLN91vrWG78ydcpPBApJzZEj4f05Gi5DIf2RxEo8O8abOkdo0\nCA0mXVbVNIO+YqeBQ7/3fGTB6Q8hMe2O7QDbo90CgYEAzF9JFnxfSky6AbEZH8Yv\naFkCMCVext3rC9xdMCk0G0W3lFi1olJp0c/2GpQN5RvXpFskTgkl+aW5mcq3dD/Z\niGo+1PKjvtQX4wjWoNvL8upvEMYPttgJBV7GBoLl1hj4thAIN+6CS5C1WfA3BKdf\nUQUc/hUes3/wEaohLt1iDtk=\n-----END PRIVATE KEY-----\n",
-  "client_email": "dialogflowmedhub@medhub-410516.iam.gserviceaccount.com",
-  "client_id": "114912830931962151974",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflowmedhub%40medhub-410516.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
+
