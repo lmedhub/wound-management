@@ -14,7 +14,7 @@ The Chatbot is designed to respond to inquiries regarding the usability of the w
 
 A statically typed superset of JavaScript, enhances code maintainability by introducing optional static typing. It plays a crucial role in catching errors during development, ensuring a more robust and reliable codebase.
 
-### Next.js
+### NextJS
 
 [Next.js](https://nextjs.org/), a React framework, elevates web development with seamless server-side rendering, automatic code splitting, and simplified configuration. This efficiency ensures a smooth user experience, making it an ideal choice for building modern, full-stack web applications.
 
