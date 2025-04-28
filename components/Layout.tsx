@@ -34,9 +34,7 @@ function Layout(props: Props) {
     }),
     []
   );
-
-  console.log(mode);
-
+  
   useEffect(() => {
     localStorage.setItem("colorMode", mode);
   }, [mode]);
